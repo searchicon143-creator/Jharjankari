@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>JharJankari — Jharkhand News & Information</title>
+<style>
+:root{
+  --bg:#f5f7fb;--surface:#fff;--surface2:#f8fafc;--text:#0f172a;--muted:#64748b;
+  --primary:#0f766e;--primary2:#14b8a6;--accent:#f59e0b;--danger:#dc2626;
+  --border:#e2e8f0;--shadow:0 10px 30px rgba(15,23,42,.07);--radius:18px;
+}
+:root[data-theme="dark"]{
+  --bg:#0b1220;--surface:#111827;--surface2:#172033;--text:#f8fafc;--muted:#94a3b8;
+  --primary:#2dd4bf;--primary2:#14b8a6;--accent:#fbbf24;--border:#263244;
+  --shadow:0 10px 30px rgba(0,0,0,.22);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.topline{height:4px;background:linear-gradient(90deg,var(--primary),var(--primary2),var(--accent))}
+header{
+  position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 94%,transparent);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--border)
+}
+.nav{max-width:1180px;margin:auto;padding:12px 18px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--primary),var(--primary2));display:grid;place-items:center;color:white;font-size:22px;box-shadow:var(--shadow)}
+.brand h1{font-size:19px;margin:0;line-height:1.1}
+.brand small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.nav-actions{margin-left:auto;display:flex;gap:8px}
+.iconbtn,.menu-btn{width:42px;height:42px;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:12px}
+.menu-btn{display:none}
+.hero{max-width:1180px;margin:22px auto 0;padding:0 18px}
+.hero-box{background:linear-gradient(135deg,#0f172a,#134e4a);border-radius:26px;padding:28px;color:white;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero-box:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-60px;top:-70px;background:rgba(45,212,191,.18)}
+.hero-box h2{font-size:clamp(27px,5vw,45px);margin:0 0 8px;max-width:700px}
+.hero-box p{margin:0;color:#cbd5e1;max-width:680px}
+.searchbar{margin-top:20px;display:flex;gap:8px;max-width:720px}
+.searchbar input{flex:1;border:0;border-radius:13px;padding:13px 15px;outline:0;background:white;color:#0f172a}
+.searchbar button{border:0;border-radius:13px;padding:0 17px;background:var(--accent);color:#111827;font-weight:700}
+.chips{display:flex;gap:8px;overflow:auto;padding:16px 0 4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;padding:8px 14px}
+.chip.active{background:var(--primary);color:white;border-color:var(--primary)}
+main{max-width:1180px;margin:0 auto;padding:18px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:10px 0 14px}
+.section-head h2{margin:0;font-size:22px}
+.section-head span{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);transition:.18s transform,.18s box-shadow;cursor:pointer;min-height:150px}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(15,23,42,.11)}
+.badge{display:inline-flex;align-items:center;gap:5px;background:color-mix(in srgb,var(--primary) 12%,var(--surface));color:var(--primary);font-size:11px;font-weight:800;padding:6px 9px;border-radius:999px}
+.card h3{font-size:19px;line-height:1.3;margin:13px 0 9px}
+.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.meta{display:flex;justify-content:space-between;gap:8px;margin-top:18px;color:var(--muted);font-size:11px}
+.empty{padding:40px 20px;text-align:center;color:var(--muted);background:var(--surface);border:1px dashed var(--border);border-radius:18px}
+#adminBar{margin-bottom:14px}
+.btn{border:0;background:var(--primary);color:white;border-radius:11px;padding:10px 15px;font-weight:700}
+.btn.secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+.btn.danger{background:var(--danger)}
+.admin-panel{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px;box-shadow:var(--shadow);margin-bottom:18px}
+.admin-panel h2{margin:0 0 14px}
+input,textarea{width:100%;border:1px solid var(--border);border-radius:11px;padding:11px 12px;background:var(--surface2);color:var(--text);outline:none}
+input:focus,textarea:focus{border-color:var(--primary)}
+.block-editor{border:1px dashed var(--border);border-radius:13px;padding:13px;margin:10px 0;position:relative;background:var(--surface2)}
+.block-editor .rm{position:absolute;right:8px;top:7px;border:0;background:transparent;color:var(--danger);font-size:18px}
+.block-editor b{font-size:11px;color:var(--muted);display:block;margin-bottom:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row.end{justify-content:flex-end;margin-top:12px}
+.article{max-width:820px;margin:10px auto 40px;background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:24px;box-shadow:var(--shadow)}
+.article h1{font-size:clamp(28px,6vw,44px);line-height:1.1;margin:10px 0}
+.article .lead{color:var(--muted);font-size:13px}
+.article-heading{font-size:23px;font-weight:800;margin:25px 0 8px}
+.article-text{font-size:17px;line-height:1.75;margin:10px 0}
+.article img{width:100%;max-height:520px;object-fit:cover;border-radius:16px;margin:18px 0}
+.article-link{margin:18px 0}.article-link a{color:var(--primary);font-weight:700}
+.ad{min-height:70px;border:1px dashed var(--border);background:var(--surface2);color:var(--muted);border-radius:14px;display:grid;place-items:center;font-size:11px;margin:16px 0}
+footer{margin-top:30px;border-top:1px solid var(--border);background:var(--surface);padding:20px 18px;color:var(--muted);font-size:12px}
+.footer-inner{max-width:1180px;margin:auto;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+#backBtn{margin-bottom:12px}
+.toast{position:fixed;left:50%;bottom:25px;transform:translateX(-50%) translateY(20px);background:#0f172a;color:white;padding:11px 16px;border-radius:999px;opacity:0;pointer-events:none;transition:.25s;z-index:100}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:800px){
+  .grid{grid-template-columns:1fr}
+  .menu-btn{display:block}
+  .nav-actions .desktop-only{display:none}
+  .hero-box{padding:22px}
+  main{padding:14px}
+}
+@media(min-width:801px){.grid .featured{grid-column:span 2}}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<header>
+  <div class="nav">
+    <button class="menu-btn" onclick="scrollToContent()" aria-label="Menu">☰</button>
+    <div class="brand">
+      <div class="logo">📰</div>
+      <div><h1>JharJankari</h1><small>Jharkhand News & Information</small></div>
+    </div>
+    <div class="nav-actions">
+      <button class="iconbtn desktop-only" onclick="shareSite()" title="Share">↗</button>
+      <button class="iconbtn" onclick="toggleTheme()" title="Theme">☾</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-box">
+    <h2>Jharkhand ki zaroori jankari, ek hi jagah.</h2>
+    <p>Local news, updates aur useful information ko simple aur clean format mein dekhiye.</p>
+    <div class="searchbar">
+      <input id="searchInput" placeholder="Khabar ya topic search karein..." oninput="renderList()">
+      <button onclick="document.getElementById('searchInput').focus()">Search</button>
+    </div>
+  </div>
+  <div class="chips">
+    <button class="chip active" onclick="setCategory('all',this)">Sabhi</button>
+    <button class="chip" onclick="setCategory('news',this)">📰 News</button>
+    <button class="chip" onclick="setCategory('jobs',this)">💼 Jobs</button>
+    <button class="chip" onclick="setCategory('govt',this)">🏛️ Sarkari</button>
+    <button class="chip" onclick="setCategory('local',this)">📍 Local</button>
+  </div>
+</section>
+
+<main id="content">
+  <div id="adminBar"></div>
+  <div id="editorPanel" style="display:none"></div>
+  <div id="articleArea">
+    <div class="section-head"><div><h2>Latest Updates</h2><span id="resultInfo">Latest articles</span></div></div>
+    <div id="articleList" class="grid"></div>
+  </div>
+  <div id="articleView" style="display:none"></div>
+</main>
+
+<footer><div class="footer-inner"><span>© JharJankari</span><span>👥 Visitors: <b id="visitorCount">--</b> · <span id="clock"></span></span></div></footer>
+<div id="toast" class="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://fqoqxjdaocbudooavsm.supabase.co';
+const SUPABASE_KEY='sb_publishable_rTmt6-cX-bY-JQ9SHUvUOQ_2VAnWNna';
+const supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let canEdit=false,cachedArticles=[],category='all';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>{try{const x=new URL(u,location.href);return ['http:','https:'].includes(x.protocol)?x.href:'#'}catch(e){return '#'}};
+function tick(){document.getElementById('clock').textContent=new Date().toLocaleTimeString('hi-IN',{hour:'2-digit',minute:'2-digit'})}
+setInterval(tick,1000);tick();
+function toast(t){const x=document.getElementById('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),2200)}
+function toggleTheme(){const dark=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=dark?'light':'dark';localStorage.setItem('jjtheme',dark?'light':'dark')}
+(function(){const t=localStorage.getItem('jjtheme');if(t)document.documentElement.dataset.theme=t})();
+function scrollToContent(){document.getElementById('content').scrollIntoView({behavior:'smooth'})}
+function setCategory(c,el){category=c;document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderList()}
+function categoryOf(a){const s=(a.title+' '+JSON.stringify(a.blocks||[])).toLowerCase();if(/job|naukri|vacancy|rojgar/.test(s))return'jobs';if(/sarkar|yojana|government|scheme/.test(s))return'govt';if(/nirsa|dhanbad|jharkhand|local|panchayat/.test(s))return'local';return a.category||'news'}
+function summary(a){const t=(a.blocks||[]).find(b=>b.type==='text'&&b.text);return t?t.text.slice(0,125)+(t.text.length>125?'…':''):'JharJankari par latest update padhiye.'}
+function formatDate(x){return x?new Date(x).toLocaleDateString('hi-IN',{day:'2-digit',month:'short',year:'numeric'}):''}
+async function loadArticles(){
+  try{const {data,error}=await supabase.from('articles').select('*').order('created_at',{ascending:false});if(error)throw error;cachedArticles=(data||[]).map(a=>({...a,blocks:Array.isArray(a.blocks)?a.blocks:[]}));renderList()}
+  catch(e){console.error(e);cachedArticles=[];renderList();toast('Articles load nahi hue')}
+}
+function renderAdminBar(){document.getElementById('adminBar').innerHTML=''}
+function renderList(){
+ const q=(document.getElementById('searchInput')?.value||'').toLowerCase().trim();
+ const list=cachedArticles.filter(a=>(category==='all'||categoryOf(a)===category)&&(!q||(a.title+' '+JSON.stringify(a.blocks||[])).toLowerCase().includes(q)));
+ document.getElementById('resultInfo').textContent=list.length+' article'+(list.length===1?'':'s');
+ const wrap=document.getElementById('articleList');
+ if(!list.length){wrap.innerHTML='<div class="empty" style="grid-column:1/-1">🔎 Koi article nahi mila.</div>';return}
+ wrap.innerHTML=list.map((a,i)=>'<article class="card '+(i===0?'featured':'')+'" onclick="viewArticle(\''+esc(a.id)+'\')"><span class="badge">● '+esc(categoryOf(a).toUpperCase())+'</span><h3>'+esc(a.title)+'</h3><p>'+esc(summary(a))+'</p><div class="meta"><span>🕒 '+formatDate(a.updated_at||a.updatedAt)+'</span><span>Read →</span></div></article>').join('')
+}
+function viewArticle(id){
+ const a=cachedArticles.find(x=>String(x.id)===String(id));if(!a)return;
+ document.getElementById('articleArea').style.display='none';document.getElementById('adminBar').style.display='none';
+ const v=document.getElementById('articleView');v.style.display='block';
+ let h='<button id="backBtn" class="btn secondary" onclick="showList()">← Wapas</button><article class="article"><span class="badge">● '+esc(categoryOf(a).toUpperCase())+'</span><h1>'+esc(a.title)+'</h1><div class="lead">Updated: '+formatDate(a.updated_at||a.updatedAt)+'</div><div class="ad">Advertisement</div>';
+ (a.blocks||[]).forEach((b,i)=>{if(b.type==='heading')h+='<div class="article-heading">'+esc(b.text)+'</div>';else if(b.type==='text')h+='<div class="article-text">'+esc(b.text)+'</div>';else if(b.type==='image'&&b.url)h+='<img src="'+esc(safeUrl(b.url))+'" alt="">';else if(b.type==='link'&&b.url)h+='<div class="article-link"><a href="'+esc(safeUrl(b.url))+'" target="_blank" rel="noopener">'+esc(b.text||b.url)+'</a></div>';if(i===1)h+='<div class="ad">Advertisement</div>'});
+ h+='<div class="ad">Advertisement</div></article>';v.innerHTML=h;scrollToContent();
+}
+function showList(){document.getElementById('articleView').style.display='none';document.getElementById('articleArea').style.display='block';document.getElementById('adminBar').style.display='block';window.scrollTo({top:0,behavior:'smooth'})}
+async function shareSite(){try{await navigator.share({title:'JharJankari',text:'Jharkhand ki useful jankari',url:location.href})}catch(e){try{await navigator.clipboard.writeText(location.href);toast('Link copied')}catch(e2){}}}
+async function init(){renderAdminBar();await loadArticles()}
+init();
+</script>
+</body>
+</html>
